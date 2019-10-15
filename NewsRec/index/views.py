@@ -105,7 +105,7 @@ def getRecNews(request):
             for browse_one in browse_dict:
                 for one in newsim.objects.filter(new_id_base=browse_one["new_id"]).order_by("-new_correlation")[:num]:
                     news_id_list.append(one.new_id_sim)
-                    all_news_hot_value[one.new_id_sim] = (newhot.objects.filter(new_id=browse_one["new_id"])[0]).new_hot
+                    all_news_hot_value[one.new_id_sim] = (newhot.objects.filter(new_id=one.new_id_sim)[0]).new_hot
             return new.objects.filter(new_id__in=news_id_list)[:20], all_news_hot_value
         # 如果该用户没有浏览记录，即该用户是第一次进入系统且没有选择任何标签 返回热度榜单数据的20-40
         else:
